@@ -1,6 +1,6 @@
 # [Install from Chrome Web Store][chrome-web-store-link]
 
-[![Chrome Web Store][chrome-web-store-version]][chrome-web-store-link] [![Chrome Web Store Users][chrome-web-store-users-badge]][chrome-web-store-link] [![Chrome Web Store Users][chrome-web-store-stars]][chrome-web-store-link]  
+[![Chrome Web Store][chrome-web-store-version]][chrome-web-store-link] [![Chrome Web Store Users][chrome-web-store-users-badge]][chrome-web-store-link] [![Chrome Web Store Users][chrome-web-store-stars]][chrome-web-store-link]
 
 **Video Speed Controller** gives you fine-grained control over any HTML5 video
 or audio element, on any site.
@@ -24,7 +24,6 @@ means higher engagement. With practice, many settle at 2x or above and find it
 HTML5 media elements expose a native playback rate API, but most players hide
 or artificially limit it. Speed adjustments should be effortless and frequent:
 we don't read at a fixed pace, and we shouldn't watch at one either.
-
 
 ## Features
 
@@ -65,6 +64,33 @@ shortcuts with different values for quick toggling. Click **Add New** in
 settings to create additional bindings. Refresh the page after making changes
 for them to take effect.
 
+## Instagram support
+
+The controller runs on instagram.com for feed videos, Reels (the Reels tab and
+`/reels/` URLs), Stories, and video posts opened in the permalink or modal
+view. The speed badge is attached to Instagram's video player chrome, in the
+corner of the video, so it stays on top of the tap layer. Clicks on the badge
+change speed; taps and swipes on the rest of the video still go to Instagram.
+
+Shortcuts work while an Instagram video is playing. They do not run while
+focus is in a comment box, a message field, or any other text input.
+
+**Remember speed** (extension options) stores the speed you pick and applies
+it when Instagram swaps in the next reel or story and when you move to another
+Instagram page. On a single visit, that speed also follows videos Instagram
+has already put on the page, including the next reel in the list.
+
+### Load the unpacked extension
+
+1. From this repository, run `npm install` and then `npm run build`. The
+   unpacked extension is the `dist/` directory.
+2. Open `chrome://extensions`.
+3. Turn on **Developer mode**.
+4. Click **Load unpacked** and select `dist/`.
+5. Reload any Instagram tab that was already open.
+
+Reload Instagram after changing options so the page picks up the new settings.
+
 ## License
 
 (MIT License) - Copyright (c) 2014 Ilya Grigorik
@@ -73,6 +99,5 @@ for them to take effect.
 [chrome-web-store-users-badge]: https://img.shields.io/chrome-web-store/users/nffaoalbilbmmfgbnbgppjihopabppdk
 [chrome-web-store-stars]: https://img.shields.io/chrome-web-store/stars/nffaoalbilbmmfgbnbgppjihopabppdk
 [github-release-badge]: https://img.shields.io/github/v/release/igrigorik/videospeed
-
 [chrome-web-store-link]: https://chromewebstore.google.com/detail/video-speed-controller/nffaoalbilbmmfgbnbgppjihopabppdk
 [github-release-link]: https://github.com/igrigorik/videospeed/releases

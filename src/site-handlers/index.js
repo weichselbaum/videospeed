@@ -11,6 +11,7 @@ class SiteHandlerManager {
       window.VSC.NetflixHandler,
       window.VSC.YouTubeHandler,
       window.VSC.FacebookHandler,
+      window.VSC.InstagramHandler,
       window.VSC.AmazonHandler,
       window.VSC.AppleHandler,
       window.VSC.DailymotionHandler,
@@ -101,8 +102,15 @@ class SiteHandlerManager {
     // Detect gif-like videos: muted looping videos with no native controls.
     // Sites like Telegram, X, Imgur serve animated stickers/GIFs as <video
     // autoplay loop muted> elements. Showing a speed overlay on these is
-    // visually noisy and not useful.
-    if (video.tagName === 'VIDEO' && video.loop && video.muted && !video.controls) {
+    // visually noisy and not useful. Sites whose real videos use the same
+    // attributes opt out via preserveMutedLoops().
+    if (
+      !handler.preserveMutedLoops() &&
+      video.tagName === 'VIDEO' &&
+      video.loop &&
+      video.muted &&
+      !video.controls
+    ) {
       window.VSC.logger.debug('Video ignored: gif-video pattern (loop + muted + no controls)');
       return true;
     }
@@ -127,6 +135,39 @@ class SiteHandlerManager {
    */
   getClassifierRules() {
     return this.getCurrentHandler().getClassifierRules();
+  }
+
+  /**
+   * Site-specific typing contexts (comment boxes, message fields) that are
+   * not native inputs.
+   * @param {EventTarget} target
+   * @returns {boolean}
+   */
+  isTypingContext(target) {
+    return this.getCurrentHandler().isTypingContext(target) === true;
+  }
+
+  /**
+   * Let the current site keep a controller attached to its player chrome.
+   * @param {HTMLElement} wrapper
+   * @param {HTMLMediaElement} video
+   */
+  anchorController(wrapper, video) {
+    const handler = this.getCurrentHandler();
+    if (typeof handler.anchorController === 'function') {
+      handler.anchorController(wrapper, video);
+    }
+  }
+
+  /**
+   * Drop per-controller site anchors when a controller is removed.
+   * @param {HTMLElement} wrapper
+   */
+  releaseController(wrapper) {
+    const handler = this.getCurrentHandler();
+    if (typeof handler.releaseController === 'function') {
+      handler.releaseController(wrapper);
+    }
   }
 
   /**

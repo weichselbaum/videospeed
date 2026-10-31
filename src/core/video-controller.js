@@ -220,11 +220,17 @@ class VideoController {
         );
         break;
 
+      case 'append':
+        positioning.insertionPoint.appendChild(fragment);
+        break;
+
       case 'firstChild':
       default:
         positioning.insertionPoint.insertBefore(fragment, positioning.insertionPoint.firstChild);
         break;
     }
+
+    window.VSC.siteHandlerManager.anchorController?.(wrapper, this.video);
 
     window.VSC.logger.debug(`Controller inserted using ${positioning.insertionMethod} method`);
   }
@@ -309,8 +315,11 @@ class VideoController {
     }
 
     // Remove DOM element
-    if (this.div && this.div.parentNode) {
-      this.div.remove();
+    if (this.div) {
+      window.VSC.siteHandlerManager?.releaseController?.(this.div);
+      if (this.div.parentNode) {
+        this.div.remove();
+      }
     }
 
     // Remove event listeners
