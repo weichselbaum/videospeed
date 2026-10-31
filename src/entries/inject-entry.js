@@ -50,6 +50,7 @@ import '../site-handlers/base-handler.js';
 import '../site-handlers/netflix-handler.js';
 import '../site-handlers/youtube-handler.js';
 import '../site-handlers/facebook-handler.js';
+import '../site-handlers/instagram-handler.js';
 import '../site-handlers/amazon-handler.js';
 import '../site-handlers/apple-handler.js';
 import '../site-handlers/dailymotion-handler.js';

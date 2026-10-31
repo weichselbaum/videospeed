@@ -223,9 +223,17 @@ class EventManager {
    * @private
    */
   isTypingContext(target) {
-    return (
-      target.nodeName === 'INPUT' || target.nodeName === 'TEXTAREA' || target.isContentEditable
-    );
+    if (!target?.nodeName) {
+      return false;
+    }
+
+    if (target.nodeName === 'INPUT' || target.nodeName === 'TEXTAREA' || target.isContentEditable) {
+      return true;
+    }
+
+    // Site handlers add composers that are not native inputs (Instagram
+    // comments and DMs use role=textbox).
+    return window.VSC.siteHandlerManager?.isTypingContext?.(target) === true;
   }
 
   /**

@@ -100,6 +100,25 @@ class BaseSiteHandler {
   }
 
   /**
+   * The shared GIF filter skips muted looping videos that have no native
+   * controls. Override and return true on sites where that pattern is a
+   * real video the user wants to control.
+   * @returns {boolean}
+   */
+  preserveMutedLoops() {
+    return false;
+  }
+
+  /**
+   * Extra typing contexts beyond input, textarea, and contentEditable.
+   * @param {EventTarget} _target
+   * @returns {boolean}
+   */
+  isTypingContext(_target) {
+    return false;
+  }
+
+  /**
    * Resolve a page gesture to exactly one controlled media element.
    *
    * Return null unless a site-specific player relationship is unambiguous.

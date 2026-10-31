@@ -1,0 +1,43 @@
+<!--
+  Reduced from a logged-out Instagram Reels capture on 2026-10-31:
+  https://www.instagram.com/reels/DfGCxoWSRWQ/
+  Obfuscated class names are omitted. Nesting, roles, aria-labels, and the
+  id-vpuid portal match the live player: the <video> and the full-size tap
+  layer are siblings under one card, and the tap layer is what elementFromPoint
+  returned for both the badge and the center of the video.
+
+  reel-locale drops the English label and keeps role=group plus
+  data-visualcompletion="ignore", which were on the same live node.
+  reel-portal keeps only the id-vpuid host, the fallback when the inner
+  group is missing.
+-->
+<div id="reel-labeled" data-reel-card>
+  <div data-video-branch>
+    <div data-video-slot></div>
+  </div>
+  <div data-instancekey="id-vpuid-fixture-labeled">
+    <div aria-label="Video player" role="group" data-visualcompletion="ignore">
+      <div role="presentation">
+        <div role="button" aria-disabled="false" data-tap-target></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="reel-locale" data-reel-card>
+  <div data-video-branch>
+    <div data-video-slot></div>
+  </div>
+  <div role="group" data-visualcompletion="ignore" data-locale-player></div>
+</div>
+
+<div id="reel-portal" data-reel-card>
+  <div data-video-branch>
+    <div data-video-slot></div>
+  </div>
+  <div data-instancekey="id-vpuid-fixture-portal"></div>
+</div>
+
+<div id="dm-composer" role="textbox" aria-label="Message..."></div>
+<textarea id="comment-box" aria-label="Add a comment…"></textarea>
+<div id="comment-button" role="button" aria-label="Comment"></div>
